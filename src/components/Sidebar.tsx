@@ -12,10 +12,10 @@ const Sidebar: React.FC = () => {
       <div className="p-5">
         <div className="flex items-center gap-3 mb-6">
           <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary via-purple to-secondary flex items-center justify-center shadow-glow">
-            <FiZap className="text-white" size={20} />
+            <FiZap className="text-white" size={18} />
           </div>
-          <h1 className="font-bold text-2xl gradient-text">
-            Manipuruhi
+          <h1 className="text-xl font-bold whitespace-nowrap gradient-text animate-gradient">
+            ManipuRuhi
           </h1>
         </div>
         

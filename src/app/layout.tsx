@@ -21,7 +21,7 @@ const saira = Saira({
 });
 
 export const metadata: Metadata = {
-  title: "Manipulation Guide - Research Tool",
+  title: "ManipuRuhi - Psychological Strategies",
   description: "A research tool for understanding manipulation techniques",
 };
 
@@ -33,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <title>Manipuruhi</title>
+        <title>ManipuRuhi</title>
         <meta name="description" content="Manipulation guide powered by Gemini AI" />
       </head>
       <body

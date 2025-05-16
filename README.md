@@ -21,8 +21,8 @@ A chat application powered by Google's Gemini API that provides insights into ma
 
 1. Clone the repository
 ```bash
-git clone <repository-url>
-cd manipuruhi
+git clone https://github.com/yourusername/ManipuRuhi.git
+cd ManipuRuhi
 ```
 
 2. Install dependencies

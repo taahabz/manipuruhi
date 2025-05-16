@@ -2,7 +2,7 @@
 
 import { Chat, ChatState } from '../types/chat';
 
-const STORAGE_KEY = 'manipuruhi_chat_data';
+const STORAGE_KEY = 'ManipuRuhi_chat_data';
 
 // Get all chats from localStorage
 export const getChatsFromStorage = (): Chat[] => {

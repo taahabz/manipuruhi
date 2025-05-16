@@ -1,6 +1,6 @@
 "use client";
 
-const USER_NAME_KEY = 'manipuruhi_user_name';
+const USER_NAME_KEY = 'ManipuRuhi_user_name';
 
 // Get user name from localStorage
 export const getUserName = (): string | null => {

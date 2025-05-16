@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FiMenu, FiSettings, FiMoon, FiSun, FiUser, FiX } from 'react-icons/fi';
+import { FiMenu, FiSettings, FiMoon, FiSun, FiUser, FiX, FiZap } from 'react-icons/fi';
 import { useChat } from '../context/ChatContext';
 import { getUserName } from '../utils/userSettings';
 
@@ -48,7 +48,7 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar, isDarkMode, toggleDarkMo
             {activeChat ? (
               <span className="text-foreground">{activeChat.title || 'New Chat'}</span>
             ) : (
-              <span className="gradient-text text-2xl font-bold">Manipuruhi</span>
+              <span className="gradient-text text-2xl font-bold">ManipuRuhi</span>
             )}
           </motion.div>
         </div>

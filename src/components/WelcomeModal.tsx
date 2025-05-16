@@ -63,7 +63,7 @@ const WelcomeModal: React.FC<WelcomeModalProps> = ({ onComplete }) => {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.3 }}
               >
-                Manipuruhi
+                ManipuRuhi
               </motion.h2>
               <motion.p 
                 className="text-white/80 text-sm"

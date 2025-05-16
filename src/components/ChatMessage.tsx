@@ -56,7 +56,7 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
             >
-              {isUser ? userName : 'Manipuruhi'}
+              {isUser ? userName : 'ManiRuruhi'}
             </motion.div>
             
             <motion.div
