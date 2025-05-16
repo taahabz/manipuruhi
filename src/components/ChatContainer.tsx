@@ -8,9 +8,24 @@ import { FiInfo, FiZap } from 'react-icons/fi';
 import { getUserName } from '../utils/userSettings';
 
 const ChatContainer: React.FC = () => {
-  const { activeChat } = useChat();
+  const { activeChat, sendMessage, createNewChat } = useChat();
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const userName = getUserName() || 'You';
+
+  // Handle suggestion click
+  const handleSuggestionClick = (suggestion: string) => {
+    // Create a new chat first if none exists
+    let chatId = activeChat?.id;
+    if (!chatId) {
+      chatId = createNewChat();
+      // Give more time for the chat creation to complete
+      setTimeout(() => {
+        sendMessage(suggestion);
+      }, 50);
+    } else {
+      sendMessage(suggestion);
+    }
+  };
 
   // Scroll to bottom when messages change
   useEffect(() => {
@@ -41,13 +56,12 @@ const ChatContainer: React.FC = () => {
               Tell me what you desire. I will make it yours, whatever it takes, whatever it breaks.
               </p>
               
- 
-              
               <div className="mt-8 flex flex-wrap gap-2 justify-center">
                 {['How to persuade someone?', 'Negotiation tactics', 'Sales techniques'].map((suggestion) => (
                   <button 
                     key={suggestion} 
                     className="px-3 py-2 rounded-full border border-border/50 text-foreground/70 hover:bg-background-light hover:text-primary hover:border-primary/30 transition-all text-sm"
+                    onClick={() => handleSuggestionClick(suggestion)}
                   >
                     {suggestion}
                   </button>

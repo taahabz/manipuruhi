@@ -5,17 +5,29 @@ import { FiSend, FiMic, FiPlus } from 'react-icons/fi';
 import { useChat } from '../context/ChatContext';
 
 const ChatInput: React.FC = () => {
-  const { sendMessage, isLoading } = useChat();
+  const { sendMessage, isLoading, activeChat, createNewChat } = useChat();
   const [input, setInput] = useState('');
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!input.trim() || isLoading) return;
     
-    sendMessage(input.trim());
+    // Create a new chat first if none exists
+    let chatId = activeChat?.id;
+    const message = input.trim();
     setInput('');
+    
+    if (!chatId) {
+      chatId = createNewChat();
+      // Give more time for the chat creation to complete
+      setTimeout(() => {
+        sendMessage(message);
+      }, 50);
+    } else {
+      sendMessage(message);
+    }
   };
 
   // Auto-resize textarea based on content

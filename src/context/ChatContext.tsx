@@ -63,15 +63,18 @@ export const ChatProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     
     const updatedChats = [...state.chats, newChat];
     
-    setState(prevState => ({
-      ...prevState,
+    // Update state immediately to ensure the new chat is available
+    setState({
       chats: updatedChats,
       activeChat: newChatId,
-    }));
+      isLoading: false,
+    });
     
+    // Save to localStorage
     saveChatsToStorage(updatedChats);
     setActiveChatId(newChatId);
     
+    console.log("Created new chat with ID:", newChatId);
     return newChatId;
   };
 
@@ -95,23 +98,15 @@ export const ChatProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       console.log("No active chat, creating a new one");
       chatId = createNewChat();
       
-      // Ensure we have the newly created chat
-      const chats = getChatsFromStorage();
-      currentChat = chats.find(chat => chat.id === chatId) || {
+      // Get the newly created chat directly
+      const newChat = {
         id: chatId,
         title: 'New Chat',
         messages: [],
         createdAt: Date.now(),
         updatedAt: Date.now(),
       };
-      
-      // Make sure the active chat is set
-      setActiveChat(chatId);
-    }
-    
-    if (!currentChat) {
-      console.error("Failed to get or create active chat");
-      return;
+      currentChat = newChat;
     }
     
     console.log("Sending message in chat:", chatId);
@@ -125,7 +120,7 @@ export const ChatProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     };
     
     // Add user message to chat
-    const updatedMessages = [...currentChat.messages, userMessage];
+    const updatedMessages = [...(currentChat.messages || []), userMessage];
     const updatedChat = {
       ...currentChat,
       messages: updatedMessages,
@@ -137,6 +132,11 @@ export const ChatProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const updatedChats = state.chats.map(chat => 
       chat.id === chatId ? updatedChat : chat
     );
+    
+    // If this is a new chat that's not in the state yet, add it
+    if (!updatedChats.some(chat => chat.id === chatId)) {
+      updatedChats.push(updatedChat);
+    }
     
     setState(prevState => ({
       ...prevState,
@@ -160,22 +160,35 @@ export const ChatProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         timestamp: Date.now(),
       };
       
+      // Get the latest state of chats to ensure we're working with the most current data
+      const currentChats = getChatsFromStorage();
+      const currentChatFromStorage = currentChats.find(c => c.id === chatId);
+      
+      // If the chat exists in storage, use it; otherwise, use our local updatedChat
+      const chatToUpdate = currentChatFromStorage || updatedChat;
+      
       // Add assistant message to chat
-      const finalMessages = [...updatedMessages, assistantMessage];
+      const finalMessages = [...chatToUpdate.messages, assistantMessage];
       const finalChat = {
-        ...updatedChat,
+        ...chatToUpdate,
         messages: finalMessages,
         updatedAt: Date.now(),
       };
       
       // Update state with assistant message
-      const finalChats = state.chats.map(chat => 
+      const finalChats = currentChats.map(chat => 
         chat.id === chatId ? finalChat : chat
       );
+      
+      // If the chat wasn't found in the current chats (which shouldn't happen but just in case)
+      if (!currentChatFromStorage) {
+        finalChats.push(finalChat);
+      }
       
       setState(prevState => ({
         ...prevState,
         chats: finalChats,
+        activeChat: chatId,
         isLoading: false,
       }));
       
