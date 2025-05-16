@@ -11,10 +11,10 @@ const Sidebar: React.FC = () => {
     <div className="w-64 h-full bg-background/80 backdrop-blur-md no-border flex flex-col">
       <div className="p-5">
         <div className="flex items-center gap-3 mb-6">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary via-purple to-secondary flex items-center justify-center shadow-glow">
-            <FiZap className="text-white" size={16} />
+          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary via-purple to-secondary flex items-center justify-center shadow-glow">
+            <FiZap className="text-white" size={20} />
           </div>
-          <h1 className="font-bold text-lg gradient-text">
+          <h1 className="font-bold text-2xl gradient-text">
             Manipuruhi
           </h1>
         </div>
@@ -82,7 +82,7 @@ const Sidebar: React.FC = () => {
             onClick={clearChats}
             className="w-full flex items-center justify-center gap-2 bg-background-light hover:bg-background-light/80 text-secondary py-2 px-4 rounded-xl transition-all neo-button"
           >
-            <FiTrash2 size={16} />
+            <FiTrash2 size={14} />
             <span>Clear all chats</span>
           </button>
         )}

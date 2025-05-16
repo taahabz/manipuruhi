@@ -48,7 +48,7 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar, isDarkMode, toggleDarkMo
             {activeChat ? (
               <span className="text-foreground">{activeChat.title || 'New Chat'}</span>
             ) : (
-              <span className="gradient-text text-lg">Manipuruhi</span>
+              <span className="gradient-text text-2xl font-bold">Manipuruhi</span>
             )}
           </motion.div>
         </div>

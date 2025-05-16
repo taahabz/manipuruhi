@@ -29,16 +29,16 @@ const ChatContainer: React.FC = () => {
                 </div>
               </div>
               
-              <h2 className="text-2xl font-bold gradient-text mb-2">
+              <h2 className="text-5xl font-bold gradient-text mb-2 pb-2">
                 Hello, {userName}!
               </h2>
               
               <h3 className="text-xl font-semibold mb-4 text-foreground/90">
-                Welcome to Manipulation Guide Research
+                Welcome to the Manipulation Bitch
               </h3>
               
               <p className="text-foreground/70 mb-6">
-                Ask about manipulation techniques for any task or scenario. This tool is designed for research and educational purposes only.
+              Tell me what you desire. I will make it yours, whatever it takes, whatever it breaks.
               </p>
               
  
