@@ -88,12 +88,14 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
                       ol: ({ node, ...props }) => <ol className="list-decimal ml-5 my-2 text-foreground/90" {...props} />,
                       li: ({ node, ...props }) => <li className="my-1" {...props} />,
                       p: ({ node, ...props }) => <p className="my-2" {...props} />,
-                      code: ({ node, inline, ...props }) => 
-                        inline ? (
+                      code: ({ node, ...props }: any) => {
+                        const isInline = props.inline || false;
+                        return isInline ? (
                           <code className="bg-background px-1 py-0.5 rounded text-secondary" {...props} />
                         ) : (
                           <code className="block bg-background p-2 rounded my-2 overflow-x-auto text-green" {...props} />
-                        )
+                        );
+                      }
                     }}
                   >
                     {message.content}
